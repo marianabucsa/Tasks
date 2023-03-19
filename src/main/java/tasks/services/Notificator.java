@@ -1,4 +1,4 @@
-package tasks.controller;
+package tasks.services;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -30,9 +30,9 @@ public class Notificator extends Thread {
                 if (t.isActive()) {
                     if (t.isRepeated() && t.getEndTime().after(currentDate)){
 
-                        Date next = t.nextTimeAfter(currentDate);
+                        Date nextDate = t.nextTimeAfter(currentDate);
                         long currentMinute = getTimeInMinutes(currentDate);
-                        long taskMinute = getTimeInMinutes(next);
+                        long taskMinute = getTimeInMinutes(nextDate);
                         if (currentMinute == taskMinute){
                             showNotification(t);
                         }

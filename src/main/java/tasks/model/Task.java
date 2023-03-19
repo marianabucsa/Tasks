@@ -1,7 +1,7 @@
 package tasks.model;
 
 import org.apache.log4j.Logger;
-import tasks.services.TaskIO;
+import tasks.repository.TaskFileManager;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -127,7 +127,7 @@ public class Task implements Serializable, Cloneable {
     }
     public String getFormattedRepeated(){
         if (isRepeated()){
-            String formattedInterval = TaskIO.getFormattedInterval(interval);
+            String formattedInterval = TaskFileManager.getFormattedInterval(interval);
             return "Every " + formattedInterval;
         }
         else {

@@ -8,9 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import tasks.controller.Controller;
-import tasks.controller.Notificator;
-import tasks.model.ArrayTaskList;
-import tasks.services.TaskIO;
+import tasks.services.Notificator;
+import tasks.repository.ArrayTaskList;
+import tasks.repository.TaskFileManager;
 import tasks.services.TasksService;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class Main extends Application {
 
     private ArrayTaskList savedTasksList = new ArrayTaskList();
 
-    private static ClassLoader classLoader = Main.class.getClassLoader();
+
     public static File savedTasksFile = new File("data/tasks.txt");
 
     private TasksService service = new TasksService(savedTasksList);//savedTasksList);
@@ -35,7 +35,7 @@ public class Main extends Application {
 
         log.info("saved data reading");
         if (savedTasksFile.length() != 0) {
-            TaskIO.readBinary(savedTasksList, savedTasksFile);
+            TaskFileManager.readBinary(savedTasksList, savedTasksFile);
         }
         try {
             log.info("application start");

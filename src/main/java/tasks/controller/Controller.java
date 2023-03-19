@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import tasks.model.Task;
 import tasks.services.DateService;
-import tasks.services.TaskIO;
+import tasks.repository.TaskFileManager;
 import tasks.services.TasksService;
 import tasks.view.Main;
 
@@ -108,7 +108,7 @@ public class Controller {
     public void deleteTask(){
         Task toDelete = (Task)tasks.getSelectionModel().getSelectedItem();
         tasksList.remove(toDelete);
-        TaskIO.rewriteFile(tasksList);
+        TaskFileManager.rewriteFile(tasksList);
     }
     @FXML
     public void showDetailedInfo(){
@@ -129,16 +129,32 @@ public class Controller {
     }
     @FXML
     public void showFilteredTasks(){
-        Date start = getDateFromFilterField(datePickerFrom.getValue(), fieldTimeFrom.getText());
-        Date end = getDateFromFilterField(datePickerTo.getValue(), fieldTimeTo.getText());
+        try {
+            Date start = getDateFromFilterField(datePickerFrom.getValue(), fieldTimeFrom.getText());
+            Date end = getDateFromFilterField(datePickerTo.getValue(), fieldTimeTo.getText());
+            Iterable<Task> filtered =  service.filterTasks(start, end);
 
-        Iterable<Task> filtered =  service.filterTasks(start, end);
+            ObservableList<Task> observableTasks = FXCollections.observableList((ArrayList)filtered);
+            tasks.setItems(observableTasks);
+            updateCountLabel(observableTasks);
+        }
+        catch (Exception e){
+            try {
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/field-validator.fxml"));
+                stage.setScene(new Scene(root, 350, 150));
+                stage.setResizable(false);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            }
+            catch (IOException ioe){
+                log.error("error loading field-validator.fxml");
+            }
+        }
 
-        ObservableList<Task> observableTasks = FXCollections.observableList((ArrayList)filtered);
-        tasks.setItems(observableTasks);
-        updateCountLabel(observableTasks);
+
     }
-    private Date getDateFromFilterField(LocalDate localDate, String time){
+    private Date getDateFromFilterField(LocalDate localDate, String time) throws Exception{
         Date date = dateService.getDateValueFromLocalDate(localDate);
         return dateService.getDateMergedWithTime(time, date);
     }

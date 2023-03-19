@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import tasks.model.Task;
 import tasks.services.DateService;
-import tasks.services.TaskIO;
+import tasks.repository.TaskFileManager;
 import tasks.services.TasksService;
 
 import java.io.IOException;
@@ -141,7 +141,7 @@ public class NewEditController {
     }
 
     @FXML
-    public void saveChanges(){
+    public void saveChanges() throws Exception {
         Task collectedFieldsTask = collectFieldsData();
         if (incorrectInputMade) return;
 
@@ -156,7 +156,7 @@ public class NewEditController {
             }
             currentTask = null;
         }
-        TaskIO.rewriteFile(tasksList);
+        TaskFileManager.rewriteFile(tasksList);
         Controller.editNewStage.close();
     }
     @FXML
@@ -164,7 +164,7 @@ public class NewEditController {
         Controller.editNewStage.close();
     }
 
-    private Task collectFieldsData(){
+    private Task collectFieldsData() throws Exception{
         incorrectInputMade = false;
         Task result = null;
         try {
@@ -187,7 +187,7 @@ public class NewEditController {
         return result;
     }
 
-    private Task makeTask(){
+    private Task makeTask() throws Exception{
         Task result;
         String newTitle = fieldTitle.getText();
         Date startDateWithNoTime = dateService.getDateValueFromLocalDate(datePickerStart.getValue());//ONLY date!!without time
