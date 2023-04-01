@@ -31,15 +31,26 @@ public class Task implements Serializable, Cloneable {
         this.start = time;
         this.end = time;
     }
-    public Task(String title, Date start, Date end, int interval){
-        if (start.getTime() < 0 || end.getTime() < 0) {
+    public Task(String title, Date start, Date end, int interval) {
+        String errorMessage = "";
+        if (start.getTime() >= end.getTime()) {
             log.error("time below bound");
-            throw new IllegalArgumentException("Time cannot be negative");
+            errorMessage += "Start date cannot be after end date\n";
         }
+
         if (interval < 1) {
             log.error("interval < than 1");
-            throw new IllegalArgumentException("interval should me > 1");
+            errorMessage += "Interval should be >= 1\n";
         }
+
+        if(title.length() < 1 || title.length() > 255) {
+            errorMessage += "Invalid title\n";
+        }
+
+        if(errorMessage.length() > 0) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+
         this.title = title;
         this.start = start;
         this.end = end;
