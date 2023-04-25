@@ -1,0 +1,16 @@
+
+Z
+java:S2057
+"?Add a "static final long serialVersionUID" field to this class.(¨—ğûøÿÿÿÿ
+6
+java:S2885" Make "sdf" an instance variable.(¸‰ˆí
+D
+java:S1940_")Use the opposite operator ("!=") instead.(‡í€µşÿÿÿÿ
+m
+java:S3776b"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(Î¥­üÿÿÿÿ
+D
+java:S2143l")Use the Java 8 Date and Time API instead.(ĞÈ´ÿÿÿÿÿ
+D
+java:S2143o")Use the Java 8 Date and Time API instead.(æªÖÿøÿÿÿÿ
+o
+java:S2975¯"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(®Ç‹¹şÿÿÿÿ

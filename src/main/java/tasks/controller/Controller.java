@@ -162,7 +162,6 @@ public class Controller {
 
     public void resetFilteredTasks(){
         tasks.setItems(tasksList);
-        //abc
     }
 
 }

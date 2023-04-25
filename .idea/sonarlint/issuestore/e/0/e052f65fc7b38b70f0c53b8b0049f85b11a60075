@@ -1,0 +1,17 @@
+
+E
+java:S1066*"/Merge this if statement with the enclosing one.(ÈĞÚ¨
+\
+java:S21844"FCast one of the operands of this multiplication operation to a "long".( …“
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(©Ù§š
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(İ–ë“ûÿÿÿÿ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(“–ış
+?
+java:S2143")Use the Java 8 Date and Time API instead.(€ğğ¿
+t
+java:S21426"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+D
+java:S21439")Use the Java 8 Date and Time API instead.(øó”åúÿÿÿÿ
+B
+java:S1602>",Remove useless curly braces around statement(ÃÉş©

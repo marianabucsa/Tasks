@@ -15,10 +15,13 @@ public class TasksOperations {
     public Iterable<Task> incoming(Date start, Date end){
         System.out.println(start);
         System.out.println(end);
+        if(end == null || start == null)
+            throw new RuntimeException("Start and End date cannot be null.");
         ArrayList<Task> incomingTasks = new ArrayList<>();
         for (Task t : tasks) {
             Date nextTime = t.nextTimeAfter(start);
-            if (nextTime != null && (nextTime.before(end) || nextTime.equals(end))) {
+            if (nextTime != null )
+                if (nextTime.before(end) || nextTime.equals(end)) {
                 incomingTasks.add(t);
                 System.out.println(t.getTitle());
             }
