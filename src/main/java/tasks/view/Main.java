@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import tasks.controller.Controller;
+import tasks.repository.LinkedTaskList;
+import tasks.repository.TaskList;
 import tasks.services.Notificator;
 import tasks.repository.ArrayTaskList;
 import tasks.repository.TaskFileManager;
@@ -23,7 +25,7 @@ public class Main extends Application {
 
     private static final Logger log = Logger.getLogger(Main.class.getName());
 
-    private ArrayTaskList savedTasksList = new ArrayTaskList();
+    private LinkedTaskList savedTasksList = new LinkedTaskList();
 
 
     public static File savedTasksFile = new File("data/tasks.txt");
