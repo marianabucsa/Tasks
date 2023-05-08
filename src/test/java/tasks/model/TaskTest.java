@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("TaskTest")
 class TaskTest {
 
-    @ParameterizedTest
+    @Test
     @Tag("Create Task")
     @DisplayName("Flow: Task created")
     @CsvSource({"task,2023-04-01 12:00,2023-04-02 12:00,2",
