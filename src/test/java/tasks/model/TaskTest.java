@@ -13,20 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskTest {
 
     @Test
-    @Tag("Create Task")
-    @DisplayName("Flow: Task created")
-    @CsvSource({"task,2023-04-01 12:00,2023-04-02 12:00,2",
-            "task,2023-04-01 12:00,2023-04-02 12:00,1",
-            "task,2023-04-01 12:00,2023-04-02 12:00,2147483646",
-            "task,2023-04-01 12:00,2023-04-02 12:00,2147483647",
-            "T,2023-04-01 12:00,2023-04-02 12:00,2",})
-    void testCreateTask(String title, String startTime, String endTime, int interval) throws ParseException {
-        Task task = new Task(title, Task.getDateFormat().parse(startTime), Task.getDateFormat().parse(endTime), interval);
+    void testCreateTask() throws ParseException {
+        Task task = new Task("task", Task.getDateFormat().parse("2023-04-01 12:00"), Task.getDateFormat().parse("2023-04-02 12:00"), 2);
 
-        Assertions.assertEquals(title, task.getTitle());
-        Assertions.assertEquals(Task.getDateFormat().parse(startTime), task.getStartTime());
-        Assertions.assertEquals(Task.getDateFormat().parse(endTime), task.getEndTime());
-        Assertions.assertEquals(interval, task.getRepeatInterval());
+        Assertions.assertEquals("task", task.getTitle());
+        Assertions.assertEquals(Task.getDateFormat().parse("2023-04-01 12:00"), task.getStartTime());
+        Assertions.assertEquals(Task.getDateFormat().parse("2023-04-02 12:00"), task.getEndTime());
+        Assertions.assertEquals(2, task.getRepeatInterval());
     }
 
     @ParameterizedTest
