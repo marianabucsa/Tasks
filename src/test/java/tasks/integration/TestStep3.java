@@ -32,10 +32,15 @@ class TestStep3 {
 
     @BeforeEach
     void setUp() {
-        task1 = mock(Task.class);
-        task2 = mock(Task.class);
-        when(task1.nextTimeAfter(new GregorianCalendar(2023, Calendar.JANUARY, 27, 12, 0, 0).getTime())).thenReturn(new GregorianCalendar(2023, Calendar.JANUARY, 27, 17, 0, 0).getTime());
-        when(task2.nextTimeAfter(new GregorianCalendar(2023, Calendar.JANUARY, 27, 12, 0, 0).getTime())).thenReturn(null);
+        Date d1 = new GregorianCalendar(2023, Calendar.JANUARY, 27, 12, 0, 0).getTime();
+        Date d2 = new GregorianCalendar(2023, Calendar.JANUARY, 28, 12, 0, 0).getTime();
+        Date d3 = new GregorianCalendar(2023, Calendar.JANUARY, 29, 12, 0, 0).getTime();
+        task1 = new Task("task1", d1, d2, 10);
+        task1.setActive(true);
+
+        task2 = new Task("task2", d1, d3, 10);
+        task2.setActive(true);
+
     }
 
     @AfterEach
@@ -61,6 +66,6 @@ class TestStep3 {
         service.addTask(task2);
 
         ArrayList<Task> result = (ArrayList<Task>) service.filterTasks(d1, d2);
-        assertEquals(1, result.size());
+        assertEquals(2, result.size());
     }
 }
